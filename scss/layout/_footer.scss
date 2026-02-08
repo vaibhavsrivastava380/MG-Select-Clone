@@ -128,7 +128,7 @@
         align-items: center;
         width: 100%;
 
-        &--left {
+        .footer__bottom--left {
             display: flex;
             gap: 40px;
             color: $bs-footer-title;
@@ -142,16 +142,16 @@
 
             a {
                 text-decoration: none;
-                color: $bs-footer-title;
+                color: $bs-footer-title !important;
                 transition: color 0.3s ease;
 
                 &:hover {
-                    color: #fff;
+                    color: #fff !important;
                 }
             }
         }
 
-        &--right {
+        .footer__bottom--right {
             display: flex;
             gap: 25px;
             align-items: center;
@@ -162,13 +162,14 @@
                 opacity: 0.6;
                 transition: opacity 0.3s ease;
                 color: $bs-footer-title;
+
                 &:hover {
                     opacity: 1;
                 }
 
                 svg {
-                    width: 18px;
-                    height: 18px;
+                    width: 17px;
+                    height: 17px;
                     fill: #fff;
                 }
             }

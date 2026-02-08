@@ -864,7 +864,7 @@ body {
   align-items: center;
   width: 100%;
 }
-.footer_section .footer__sub_bottom--left {
+.footer_section .footer__sub_bottom .footer__bottom--left {
   display: flex;
   gap: 40px;
   color: #787879;
@@ -872,34 +872,34 @@ body {
   font-family: "Inter", sans-serif;
   font-weight: 400;
 }
-.footer_section .footer__sub_bottom--left div {
+.footer_section .footer__sub_bottom .footer__bottom--left div {
   margin: 0;
 }
-.footer_section .footer__sub_bottom--left a {
+.footer_section .footer__sub_bottom .footer__bottom--left a {
   text-decoration: none;
-  color: #787879;
+  color: #787879 !important;
   transition: color 0.3s ease;
 }
-.footer_section .footer__sub_bottom--left a:hover {
-  color: #fff;
+.footer_section .footer__sub_bottom .footer__bottom--left a:hover {
+  color: #fff !important;
 }
-.footer_section .footer__sub_bottom--right {
+.footer_section .footer__sub_bottom .footer__bottom--right {
   display: flex;
   gap: 25px;
   align-items: center;
 }
-.footer_section .footer__sub_bottom--right a {
+.footer_section .footer__sub_bottom .footer__bottom--right a {
   display: flex;
   align-items: center;
   opacity: 0.6;
   transition: opacity 0.3s ease;
   color: #787879;
 }
-.footer_section .footer__sub_bottom--right a:hover {
+.footer_section .footer__sub_bottom .footer__bottom--right a:hover {
   opacity: 1;
 }
-.footer_section .footer__sub_bottom--right a svg {
-  width: 18px;
-  height: 18px;
+.footer_section .footer__sub_bottom .footer__bottom--right a svg {
+  width: 17px;
+  height: 17px;
   fill: #fff;
 }/*# sourceMappingURL=main.css.map */
