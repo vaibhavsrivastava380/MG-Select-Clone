@@ -1,0 +1,24 @@
+// for scrollbar sections
+.body_wrapper {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+.hero_section {
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    background-color: aqua;
+    position: relative;
+}
+
+.section {
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    background-color: aqua;
+
+
+}

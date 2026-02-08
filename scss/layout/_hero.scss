@@ -1,0 +1,56 @@
+@import "../abstracts/_mixins.scss";
+.hero_video--wrapper {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+}
+
+.hero__video {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    object-fit: cover;
+}
+
+.hero__volume {
+    position: absolute;
+    bottom: 15px;
+    left: 20px;
+    height: 40px;
+    width: 40px;
+    z-index: 10;
+    cursor: pointer;
+    transition: opacity 0.4s ease;
+}
+
+.hero__volume--mute {
+    display: none;
+}
+
+.hero__knowmore {
+    position: absolute;
+    bottom: 35px;
+    left: 8%;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &--discription {
+        font-family: sequel, sans-serif;
+        font-size: 30px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 30px;
+        letter-spacing: 1.5px;
+
+    }
+
+    .know__more--button_wrapper {
+        @include all_button;
+        
+
+    }
+}

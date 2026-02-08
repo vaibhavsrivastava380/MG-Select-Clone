@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    overflow: hidden;
+
+}
+
+
+
+@import "./components/_navbar.scss";
+@import "./layout/_hero.scss";
+@import "./components/_common_components.scss";
+@import "./components/_side_nav.scss";
+@import "./layout/_about.scss";
+@import "./layout/_new_era.scss";
+@import "./layout/_center.scss";
+@import "./layout/_history.scss";
+@import "./layout/_footer.scss";

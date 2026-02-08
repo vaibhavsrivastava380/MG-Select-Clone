@@ -1,0 +1,8 @@
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+.history_section {
+    
+    scroll-snap-align: center;
+    height: 100vh;
+}
