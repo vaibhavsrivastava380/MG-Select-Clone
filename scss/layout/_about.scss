@@ -55,7 +55,7 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
 
-        
+
     }
 
     .about__button--text--knowmore {
@@ -149,6 +149,7 @@
 
         &.active {
             display: block;
+            
         }
 
         &:hover {
@@ -206,5 +207,27 @@
 
     &.no-transition {
         transition: none !important;
+    }
+}
+
+.about__progress {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0;
+    z-index: 10;
+    width: 550px;
+
+    .progress-line {
+        height: 4px;
+        flex: 1;
+        background-color: rgba(255, 255, 255, 0.3); // Dim part
+        transition: background-color 0.5s ease;
+
+        &.active {
+            background-color: #fff;
+        }
     }
 }

@@ -106,6 +106,10 @@ const carTaglineEl = document.getElementById('about-car-tagline');
 const cybersterImg = document.querySelector('.about__image[data-car="cyberster"]');
 const m9Img = document.querySelector('.about__image[data-car="m9"]');
 
+// Progress Lines
+const progCyberster = document.getElementById('prog-cyberster');
+const progM9 = document.getElementById('prog-m9');
+
 // Buttons
 const nextBtn = document.getElementById('about-next');
 const prevBtn = document.getElementById('about-prev');
@@ -131,6 +135,10 @@ nextBtn.addEventListener('click', function () {
         carNameEl.innerText = 'MG M9';
         carTaglineEl.innerText = 'Luxury, Sculpted.';
         shownCar = 'm9';
+        if (progCyberster && progM9) {
+            progCyberster.classList.remove('active');
+            progM9.classList.add('active');
+        }
     } else {
         // Move M9 out (to left)
         m9Img.classList.remove('active', 'slide-right');
@@ -148,6 +156,10 @@ nextBtn.addEventListener('click', function () {
         carNameEl.innerText = 'MG Cyberster';
         carTaglineEl.innerText = 'Driven by vision, not convention.';
         shownCar = 'cyberster';
+        if (progCyberster && progM9) {
+            progCyberster.classList.add('active');
+            progM9.classList.remove('active');
+        }
     }
 });
 
@@ -170,6 +182,10 @@ prevBtn.addEventListener('click', function () {
         carNameEl.innerText = 'MG M9';
         carTaglineEl.innerText = 'Luxury, Sculpted.';
         shownCar = 'm9';
+        if (progCyberster && progM9) {
+            progCyberster.classList.remove('active');
+            progM9.classList.add('active');
+        }
     } else {
         // Move M9 out (to right)
         m9Img.classList.remove('active', 'slide-left');
@@ -187,6 +203,10 @@ prevBtn.addEventListener('click', function () {
         carNameEl.innerText = 'MG Cyberster';
         carTaglineEl.innerText = 'Driven by vision, not convention.';
         shownCar = 'cyberster';
+        if (progCyberster && progM9) {
+            progCyberster.classList.add('active');
+            progM9.classList.remove('active');
+        }
     }
 });
 
