@@ -92,4 +92,45 @@
             }
         }
     }
+
+    .center__arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 60px;
+        height: 60px;
+        background: rgba(0, 0, 0, 0.3); // Semi-transparent dark background
+        border: 1px solid rgba(255, 255, 255, 0.8); // Visible outline
+        border-radius: 50%; // Circular
+        cursor: pointer;
+        z-index: 100;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(4px);
+
+        svg {
+            width: 24px; // Smaller icon inside the button
+            height: 24px;
+            stroke: #fff; // White arrow
+            stroke-width: 2;
+            pointer-events: none;
+        }
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.6);
+            border-color: #fff;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        &.prev {
+            left: 2%;
+        }
+
+        &.next {
+            right: 2%;
+        }
+    }
 }
