@@ -417,79 +417,135 @@ window.addEventListener('load', () => {
     }
 });
 
-// Simple Logo Scroll Code
-function moveLogo() {
-    // 1. Get the Logo and the Next Section
+// Unified Nav Visibility and Theme Logic
+const navScrollLogic = () => {
     const logo = document.querySelector('.intro-logo');
-    const nextSection = document.getElementById('newera');
+    const logoImg = document.querySelector('.intro-logo img');
+    const hamburger = document.querySelector('.hamburger'); // Label
+    const hamburgerLines = document.querySelectorAll('.hamburger .line');
 
-    // If these things don't exist, stop here (to avoid errors)
-    if (!logo || !nextSection) return;
+    // Sections
+    const heroSection = document.getElementById('hero');
+    const aboutSection = document.getElementById('about');
+    const newEraSection = document.getElementById('newera');
+    const centersSection = document.getElementById('centres');
+    const historySection = document.getElementById('history');
+    const footerSection = document.getElementById('footer');
 
-    // 2. Find out how far the Next Section is from the top of screen
-    const distanceTop = nextSection.getBoundingClientRect().top;
+    if (!logo || !hamburger) return;
 
-    // 3. Set a point to start moving the logo up (when section is 150px away)
-    const startMovingPoint = 150;
+    // Helper to check if Element is essentially in view (taking up center of screen)
+    const isInView = (el) => {
+        if (!el) return false;
+        const rect = el.getBoundingClientRect();
+        // Check if the element overlaps with the middle of the viewport
+        const viewportMiddle = window.innerHeight / 2;
+        return rect.top <= viewportMiddle && rect.bottom >= viewportMiddle;
+    };
 
-    // 4. Check if we reached that point
-    if (distanceTop < startMovingPoint) {
-        // Move the logo UP. 
-        // We subtract distanceTop creates a negative number to move up.
-        const moveUp = startMovingPoint - distanceTop;
-        logo.style.transform = `translate(-50%, -${moveUp}px)`;
+    // Helper to Check if Element is entering viewport
+    const isEntering = (el) => {
+        if (!el) return false;
+        const rect = el.getBoundingClientRect();
+        return rect.top < window.innerHeight && rect.bottom > 0;
+    }
+
+    // Default State: Visible
+    let shouldHide = false;
+    let theme = 'light'; // 'light' means White Logo/Lines, 'dark' means Black
+
+    // 1. Check Visibility based on specific sections
+    // "vanish immediately as newera section appear"
+    // "not on footer"
+
+    // If New Era is entering or active -> Hide
+    // We check if New Era top is within viewport or above it (but not so far above that we are in Centers)
+    if (newEraSection) {
+        const newEraRect = newEraSection.getBoundingClientRect();
+        // If New Era is mostly visible or we are scrolling through it
+        // User wants it to vanish "immediately as newera section appear"
+        // So if top of New Era is < window height (it started entering)
+        // AND bottom of New Era is > 0 (it hasn't fully left)
+        if (newEraRect.top < window.innerHeight && newEraRect.bottom > 0) {
+            shouldHide = true;
+        }
+    }
+
+    // If Footer is entering -> Hide
+    if (footerSection) {
+        const footerRect = footerSection.getBoundingClientRect();
+        if (footerRect.top < window.innerHeight) {
+            shouldHide = true;
+        }
+    }
+
+    // Apply Visibility
+    if (shouldHide) {
+        logo.style.opacity = '0';
+        logo.style.pointerEvents = 'none';
+        hamburger.style.opacity = '0';
+        hamburger.style.pointerEvents = 'none';
     } else {
-        // Otherwise, keep logo fixed in place
-        logo.style.transform = `translate(-50%, 0)`;
+        logo.style.opacity = '1';
+        logo.style.pointerEvents = 'auto';
+        hamburger.style.opacity = '1';
+        hamburger.style.pointerEvents = 'auto';
+        // Reset transform from previous logic if any
+        logo.style.transform = 'translate(-50%, 0)';
+    }
+
+    // 2. Check Theme (Color)
+    // We only care about color if it is visible
+    if (!shouldHide) {
+        // Default to Light (White)
+        theme = 'light';
+
+        // Check if we are in About Section
+        if (isInView(aboutSection)) {
+            // Check Day/Night mode
+            if (aboutSection.classList.contains('day-mode')) {
+                theme = 'dark'; // Day mode = Dark Logo
+            } else {
+                theme = 'light'; // Night mode = Light Logo
+            }
+        }
+
+        // Check Centres - Dark
+        if (centersSection && isInView(centersSection)) {
+            theme = 'dark';
+        }
+
+        // Check History - Dark
+        if (historySection && isInView(historySection)) {
+            theme = 'dark';
+        }
+
+        // Check if we are in Centers or History
+        // User said "both come back...". Usually these have dark backgrounds or images, so Light is safe.
+        // If Centers is white background, we might need Dark.
+        // Let's assume Light for now as typical for overlay.
+        // Actually, if Centers has white background, we need Dark.
+        // Let's check: Centers has "center__image" class. Likely standard images. 
+        // History has "history_section" with dark background usually.
+
+        // But wait, if we are in Hero -> Light.
+        // If we are in About (Day) -> Dark.
+
+        // Apply Theme
+        if (theme === 'light') {
+            if (logoImg) logoImg.src = './assets/images/mg-select-final-logo-light.webp';
+            hamburgerLines.forEach(line => line.style.backgroundColor = '#fff');
+        } else {
+            if (logoImg) logoImg.src = './assets/images/mg-select-final-logo-dark.webp';
+            hamburgerLines.forEach(line => line.style.backgroundColor = '#000');
+        }
     }
 }
 
-// 5. Run this function whenever the user SCROLLS
-// 5. Run this function whenever the user SCROLLS
+// Attach Listener
 const scrollArea = document.querySelector('.body_wrapper');
 if (scrollArea) {
-    scrollArea.addEventListener('scroll', () => {
-        moveLogo();
-        handleLogoThemeChange();
-    });
-}
-
-// Function to handle Logo Theme on Scroll
-// Function to handle Logo Theme on Scroll
-function handleLogoThemeChange() {
-    const aboutSection = document.getElementById('about');
-    const mainLogo = document.querySelector('.intro-logo img');
-    const hamburgerLines = document.querySelectorAll('.hamburger .line'); // Select Lines
-
-    if (!aboutSection || !mainLogo) return;
-
-    const aboutRect = aboutSection.getBoundingClientRect();
-
-    // Check if About section is in view (e.g., top is near 0 or within viewport)
-    // We want this to happen when the About section is the main one visible.
-    // Let's say when the top of About is within the top half of the screen.
-    const threshold = window.innerHeight / 2;
-
-    if (aboutRect.top <= threshold && aboutRect.bottom >= threshold) {
-        // We are in the About section
-
-        // Check if Night Mode is active on the section
-        if (aboutSection.classList.contains('night-mode')) {
-            mainLogo.src = './assets/images/mg-select-final-logo-light.webp';
-            hamburgerLines.forEach(line => line.style.backgroundColor = '#fff'); // White Lines
-        } else {
-            // Default is Day Mode
-            mainLogo.src = './assets/images/mg-select-final-logo-dark.webp';
-            hamburgerLines.forEach(line => line.style.backgroundColor = '#000'); // Black Lines
-        }
-    } else {
-        // We are NOT in the About section (likely Hero or New Era)
-        // Reset to Light logo and White Lines (because Hero video is dark background usually)
-
-        if (aboutRect.top > threshold) {
-            // We are above About section (in Hero)
-            mainLogo.src = './assets/images/mg-select-final-logo-light.webp';
-            hamburgerLines.forEach(line => line.style.backgroundColor = '#fff'); // White Lines
-        }
-    }
+    scrollArea.addEventListener('scroll', navScrollLogic);
+    // Initial Call
+    navScrollLogic();
 }
