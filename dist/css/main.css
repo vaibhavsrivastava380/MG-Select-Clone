@@ -329,6 +329,41 @@ body {
   padding: 12px;
 }
 
+.intro-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 1s ease-in-out;
+}
+.intro-overlay .intro-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  transition: all 1s ease-in-out;
+}
+.intro-overlay .intro-logo img {
+  width: 100%;
+  height: auto;
+}
+.intro-overlay.animate {
+  background-color: transparent;
+  pointer-events: none;
+}
+.intro-overlay.animate .intro-logo {
+  top: 40px;
+  transform: translate(-50%, 0);
+  width: 200px;
+}
+
 .body_wrapper {
   height: 100vh;
   overflow-y: scroll;

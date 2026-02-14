@@ -366,3 +366,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (firstActive) firstActive.classList.add('active');
     }, 100);
 });
+
+// Intro Logo Animation
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const overlay = document.querySelector('.intro-overlay');
+        if (overlay) {
+            overlay.classList.add('animate');
+        }
+    }, 1000);
+});
