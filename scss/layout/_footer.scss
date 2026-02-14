@@ -41,7 +41,7 @@
                     border: none;
                     padding: 0 20px;
                     height: 50px;
-                    width: 300px;
+                    width: 360px;
                     color: #fff;
                     outline: none;
 
@@ -52,6 +52,8 @@
 
                 .know__more--button_wrapper {
                     @include all_button;
+                    width: 30%;
+                    padding: 2%;
                 }
             }
 
@@ -144,7 +146,7 @@
                 text-decoration: none;
                 color: $bs-footer-title !important;
                 transition: color 0.3s ease;
-
+                letter-spacing: 2px;
                 &:hover {
                     color: #fff !important;
                 }

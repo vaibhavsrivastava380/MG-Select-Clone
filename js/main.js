@@ -1,6 +1,6 @@
 
 
-
+console.log("MG Select JS Loaded");
 // for hero mute unmute button
 let video = document.querySelector('.hero__video');
 let unmuteBtn = document.querySelector('.hero__volume--unmute');
@@ -293,3 +293,76 @@ centerNavItems.forEach((item, index) => {
 });
 
 
+
+// History Section Swiper Logic
+const historyData = [
+    { year: '1924', topLabel: 'A STAR IS BORN', bottomLabel: '' },
+    { year: '1930', topLabel: 'THE BIRTH OF MG CAR CLUB', bottomLabel: '' },
+    { year: '1933', topLabel: "IT'S A WINNER", bottomLabel: "" },
+    { year: '1945', topLabel: 'A BRITISH ICON, AN AMERICAN SENSATION', bottomLabel: '' },
+    { year: '1956', topLabel: 'AN ALL-TIME CLASSIC', bottomLabel: '' },
+    { year: '1957', topLabel: 'WORLD RECORD CONQUERED', bottomLabel: '' },
+    { year: '1959', topLabel: 'THE MGA', bottomLabel: '' },
+    { year: '2025', topLabel: 'CYBERSTER', bottomLabel: '' },
+    { year: '2025', topLabel: 'MG M9', bottomLabel: '' }
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+    const swiperSlides = document.querySelectorAll('.history_section__scroll--images .swiper-slide');
+
+    swiperSlides.forEach((slide, index) => {
+        const itemData = historyData[index] || { year: '', topLabel: '', bottomLabel: '' };
+        const img = slide.querySelector('img');
+
+        // Construct the rich structure inside swiper slide
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'history_item';
+
+        const yearSpan = document.createElement('span');
+        yearSpan.className = 'year';
+        yearSpan.innerText = itemData.year;
+
+        const imageWrapper = document.createElement('div');
+        imageWrapper.className = 'image_wrapper';
+
+        const topOverlay = document.createElement('span');
+        topOverlay.className = 'label_overlay';
+        topOverlay.innerText = '+ ' + itemData.topLabel;
+
+        const bottomLabel = document.createElement('span');
+        bottomLabel.className = 'bottom_label';
+        bottomLabel.innerText = itemData.bottomLabel;
+
+        // Re-assemble
+        contentDiv.appendChild(yearSpan);
+        contentDiv.appendChild(imageWrapper);
+        imageWrapper.appendChild(topOverlay);
+        imageWrapper.appendChild(bottomLabel);
+        if (img) imageWrapper.appendChild(img);
+
+        slide.appendChild(contentDiv);
+    });
+
+    const swiper = new Swiper(".mySwiper", {
+        slidesPerView: "auto",
+        centeredSlides: true,
+        spaceBetween: 0,
+        grabCursor: true,
+        initialSlide: 2, // Start with 1933
+        on: {
+            slideChange: function () {
+                const slides = document.querySelectorAll('.history_item');
+                slides.forEach(s => s.classList.remove('active'));
+
+                const activeSlide = this.slides[this.activeIndex].querySelector('.history_item');
+                if (activeSlide) activeSlide.classList.add('active');
+            }
+        }
+    });
+
+    // Manually trigger first active state
+    setTimeout(() => {
+        const firstActive = document.querySelectorAll('.history_item')[swiper.activeIndex];
+        if (firstActive) firstActive.classList.add('active');
+    }, 100);
+});
