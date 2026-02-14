@@ -327,6 +327,7 @@ body {
   color: #fff;
   border: 0.5px solid #fff;
   padding: 12px;
+  cursor: pointer;
 }
 
 .intro-overlay {
@@ -357,6 +358,7 @@ body {
 .intro-overlay.animate {
   background-color: transparent;
   pointer-events: none;
+  position: fixed;
 }
 .intro-overlay.animate .intro-logo {
   top: 40px;
@@ -473,9 +475,6 @@ body {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.about_section .about__button_wrapper:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
 .about_section .about__button--text--knowmore {
   font-family: inter, sans-serif;
   font-size: 13px;
@@ -489,9 +488,6 @@ body {
   cursor: pointer;
   opacity: 0.8;
   transition: opacity 0.3s ease;
-}
-.about_section .about__Section--download:hover {
-  opacity: 1;
 }
 .about_section .about__Section--download--text {
   font-family: inter, sans-serif;

@@ -55,9 +55,7 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
 
-        &:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
+        
     }
 
     .about__button--text--knowmore {
@@ -75,9 +73,6 @@
         opacity: 0.8;
         transition: opacity 0.3s ease;
 
-        &:hover {
-            opacity: 1;
-        }
 
         &--text {
             font-family: inter, sans-serif;

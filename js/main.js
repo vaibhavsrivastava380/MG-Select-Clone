@@ -207,6 +207,16 @@ sunIcon.addEventListener('click', function () {
         let nightSrc = img.getAttribute('data-night');
         img.src = nightSrc;
     });
+
+    // Change Fixed Logo to Light for Night Theme
+    const mainLogo = document.querySelector('.intro-logo img');
+    if (mainLogo) {
+        mainLogo.src = './assets/images/mg-select-final-logo-light.webp';
+    }
+
+    // Change Hamburger to White
+    const hamburgerLines = document.querySelectorAll('.hamburger .line');
+    hamburgerLines.forEach(line => line.style.backgroundColor = '#fff');
 });
 
 // Theme Toggle (Day)
@@ -222,6 +232,16 @@ moonIcon.addEventListener('click', function () {
         let daySrc = img.getAttribute('data-day');
         img.src = daySrc;
     });
+
+    // Change Fixed Logo to Dark for Day Theme
+    const mainLogo = document.querySelector('.intro-logo img');
+    if (mainLogo) {
+        mainLogo.src = './assets/images/mg-select-final-logo-dark.webp';
+    }
+
+    // Change Hamburger to Black
+    const hamburgerLines = document.querySelectorAll('.hamburger .line');
+    hamburgerLines.forEach(line => line.style.backgroundColor = '#000');
 });
 
 
@@ -369,10 +389,87 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Intro Logo Animation
 window.addEventListener('load', () => {
-    setTimeout(() => {
-        const overlay = document.querySelector('.intro-overlay');
-        if (overlay) {
+    const overlay = document.querySelector('.intro-overlay');
+    if (overlay) {
+        setTimeout(() => {
             overlay.classList.add('animate');
-        }
-    }, 1000);
+        }, 1000);
+    }
 });
+
+// Simple Logo Scroll Code
+function moveLogo() {
+    // 1. Get the Logo and the Next Section
+    const logo = document.querySelector('.intro-logo');
+    const nextSection = document.getElementById('newera');
+
+    // If these things don't exist, stop here (to avoid errors)
+    if (!logo || !nextSection) return;
+
+    // 2. Find out how far the Next Section is from the top of screen
+    const distanceTop = nextSection.getBoundingClientRect().top;
+
+    // 3. Set a point to start moving the logo up (when section is 150px away)
+    const startMovingPoint = 150;
+
+    // 4. Check if we reached that point
+    if (distanceTop < startMovingPoint) {
+        // Move the logo UP. 
+        // We subtract distanceTop creates a negative number to move up.
+        const moveUp = startMovingPoint - distanceTop;
+        logo.style.transform = `translate(-50%, -${moveUp}px)`;
+    } else {
+        // Otherwise, keep logo fixed in place
+        logo.style.transform = `translate(-50%, 0)`;
+    }
+}
+
+// 5. Run this function whenever the user SCROLLS
+// 5. Run this function whenever the user SCROLLS
+const scrollArea = document.querySelector('.body_wrapper');
+if (scrollArea) {
+    scrollArea.addEventListener('scroll', () => {
+        moveLogo();
+        handleLogoThemeChange();
+    });
+}
+
+// Function to handle Logo Theme on Scroll
+// Function to handle Logo Theme on Scroll
+function handleLogoThemeChange() {
+    const aboutSection = document.getElementById('about');
+    const mainLogo = document.querySelector('.intro-logo img');
+    const hamburgerLines = document.querySelectorAll('.hamburger .line'); // Select Lines
+
+    if (!aboutSection || !mainLogo) return;
+
+    const aboutRect = aboutSection.getBoundingClientRect();
+
+    // Check if About section is in view (e.g., top is near 0 or within viewport)
+    // We want this to happen when the About section is the main one visible.
+    // Let's say when the top of About is within the top half of the screen.
+    const threshold = window.innerHeight / 2;
+
+    if (aboutRect.top <= threshold && aboutRect.bottom >= threshold) {
+        // We are in the About section
+
+        // Check if Night Mode is active on the section
+        if (aboutSection.classList.contains('night-mode')) {
+            mainLogo.src = './assets/images/mg-select-final-logo-light.webp';
+            hamburgerLines.forEach(line => line.style.backgroundColor = '#fff'); // White Lines
+        } else {
+            // Default is Day Mode
+            mainLogo.src = './assets/images/mg-select-final-logo-dark.webp';
+            hamburgerLines.forEach(line => line.style.backgroundColor = '#000'); // Black Lines
+        }
+    } else {
+        // We are NOT in the About section (likely Hero or New Era)
+        // Reset to Light logo and White Lines (because Hero video is dark background usually)
+
+        if (aboutRect.top > threshold) {
+            // We are above About section (in Hero)
+            mainLogo.src = './assets/images/mg-select-final-logo-light.webp';
+            hamburgerLines.forEach(line => line.style.backgroundColor = '#fff'); // White Lines
+        }
+    }
+}
