@@ -8,9 +8,20 @@
     display: none;
 }
 
-body {
-    overflow: hidden;
+html {
+    // scroll-behavior: smooth; 
+}
 
+body {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
 

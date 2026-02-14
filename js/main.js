@@ -419,133 +419,139 @@ window.addEventListener('load', () => {
 
 // Unified Nav Visibility and Theme Logic
 const navScrollLogic = () => {
+    // 1. Get Elements
     const logo = document.querySelector('.intro-logo');
     const logoImg = document.querySelector('.intro-logo img');
-    const hamburger = document.querySelector('.hamburger'); // Label
+    const hamburger = document.querySelector('.hamburger');
     const hamburgerLines = document.querySelectorAll('.hamburger .line');
 
-    // Sections
-    const heroSection = document.getElementById('hero');
-    const aboutSection = document.getElementById('about');
-    const newEraSection = document.getElementById('newera');
-    const centersSection = document.getElementById('centres');
-    const historySection = document.getElementById('history');
-    const footerSection = document.getElementById('footer');
+    // 2. Get Sections
+    const about = document.getElementById('about');
+    const newEra = document.getElementById('newera');
+    const centres = document.getElementById('centres');
+    const history = document.getElementById('history');
+    const footer = document.getElementById('footer');
 
+    // Safety Check
     if (!logo || !hamburger) return;
 
-    // Helper to check if Element is essentially in view (taking up center of screen)
-    const isInView = (el) => {
-        if (!el) return false;
-        const rect = el.getBoundingClientRect();
-        // Check if the element overlaps with the middle of the viewport
-        const viewportMiddle = window.innerHeight / 2;
-        return rect.top <= viewportMiddle && rect.bottom >= viewportMiddle;
-    };
+    // 3. Determine Visibility and theme
+    // Default: Visible and Light (White)
+    let isHidden = false;
+    let isDarkTheme = false;
 
-    // Helper to Check if Element is entering viewport
-    const isEntering = (el) => {
-        if (!el) return false;
-        const rect = el.getBoundingClientRect();
-        return rect.top < window.innerHeight && rect.bottom > 0;
+    // Check where we are on the page
+    // We check the 'top' position of each section relative to the viewport window
+    const newEraTop = newEra ? newEra.getBoundingClientRect().top : 10000;
+    const centresTop = centres ? centres.getBoundingClientRect().top : 10000;
+    const historyTop = history ? history.getBoundingClientRect().top : 10000;
+    const footerTop = footer ? footer.getBoundingClientRect().top : 10000;
+    const aboutTop = about ? about.getBoundingClientRect().top : 10000;
+
+    // Logic Flow from Top to Bottom
+
+    // If Footer is appearing (coming up from bottom)
+    if (footerTop < window.innerHeight) {
+        isHidden = true;
     }
-
-    // Default State: Visible
-    let shouldHide = false;
-    let theme = 'light'; // 'light' means White Logo/Lines, 'dark' means Black
-
-    // 1. Check Visibility based on specific sections
-    // "vanish immediately as newera section appear"
-    // "not on footer"
-
-    // If New Era is entering or active -> Hide
-    // We check if New Era top is within viewport or above it (but not so far above that we are in Centers)
-    if (newEraSection) {
-        const newEraRect = newEraSection.getBoundingClientRect();
-        // If New Era is mostly visible or we are scrolling through it
-        // User wants it to vanish "immediately as newera section appear"
-        // So if top of New Era is < window height (it started entering)
-        // AND bottom of New Era is > 0 (it hasn't fully left)
-        if (newEraRect.top < window.innerHeight && newEraRect.bottom > 0) {
-            shouldHide = true;
+    // If History is appearing
+    else if (historyTop < window.innerHeight) {
+        isHidden = false;
+        isDarkTheme = true; // History = Dark
+    }
+    // If Centres is appearing
+    else if (centresTop < window.innerHeight) {
+        isHidden = false;
+        isDarkTheme = true; // Centres = Dark
+    }
+    // If New Era is appearing
+    // It should vanish "immediately" as New Era appears
+    else if (newEraTop < window.innerHeight) {
+        isHidden = true;
+    }
+    // If About is appearing (or we are in About)
+    else if (aboutTop < window.innerHeight) {
+        isHidden = false;
+        // About Theme depends on Day/Night Toggle
+        if (about.classList.contains('day-mode')) {
+            isDarkTheme = true;
+        } else {
+            isDarkTheme = false;
         }
     }
-
-    // If Footer is entering -> Hide
-    if (footerSection) {
-        const footerRect = footerSection.getBoundingClientRect();
-        if (footerRect.top < window.innerHeight) {
-            shouldHide = true;
-        }
+    // Otherwise we are at Hero (Top) -> Light
+    else {
+        isHidden = false;
+        isDarkTheme = false;
     }
 
-    // Apply Visibility
-    if (shouldHide) {
+    // 4. Apply Changes
+
+    // Visibility
+    if (isHidden) {
         logo.style.opacity = '0';
-        logo.style.pointerEvents = 'none';
         hamburger.style.opacity = '0';
+        logo.style.pointerEvents = 'none'; // Disable clicks when hidden
         hamburger.style.pointerEvents = 'none';
     } else {
         logo.style.opacity = '1';
-        logo.style.pointerEvents = 'auto';
         hamburger.style.opacity = '1';
+        logo.style.pointerEvents = 'auto';
         hamburger.style.pointerEvents = 'auto';
-        // Reset transform from previous logic if any
-        logo.style.transform = 'translate(-50%, 0)';
+        logo.style.transform = 'translate(-50%, 0)'; // Ensure proper position
     }
 
-    // 2. Check Theme (Color)
-    // We only care about color if it is visible
-    if (!shouldHide) {
-        // Default to Light (White)
-        theme = 'light';
-
-        // Check if we are in About Section
-        if (isInView(aboutSection)) {
-            // Check Day/Night mode
-            if (aboutSection.classList.contains('day-mode')) {
-                theme = 'dark'; // Day mode = Dark Logo
-            } else {
-                theme = 'light'; // Night mode = Light Logo
-            }
-        }
-
-        // Check Centres - Dark
-        if (centersSection && isInView(centersSection)) {
-            theme = 'dark';
-        }
-
-        // Check History - Dark
-        if (historySection && isInView(historySection)) {
-            theme = 'dark';
-        }
-
-        // Check if we are in Centers or History
-        // User said "both come back...". Usually these have dark backgrounds or images, so Light is safe.
-        // If Centers is white background, we might need Dark.
-        // Let's assume Light for now as typical for overlay.
-        // Actually, if Centers has white background, we need Dark.
-        // Let's check: Centers has "center__image" class. Likely standard images. 
-        // History has "history_section" with dark background usually.
-
-        // But wait, if we are in Hero -> Light.
-        // If we are in About (Day) -> Dark.
-
-        // Apply Theme
-        if (theme === 'light') {
-            if (logoImg) logoImg.src = './assets/images/mg-select-final-logo-light.webp';
-            hamburgerLines.forEach(line => line.style.backgroundColor = '#fff');
-        } else {
+    // Theme (Color) - Only if visible
+    if (!isHidden) {
+        if (isDarkTheme) {
+            // Dark (Black)
             if (logoImg) logoImg.src = './assets/images/mg-select-final-logo-dark.webp';
             hamburgerLines.forEach(line => line.style.backgroundColor = '#000');
+        } else {
+            // Light (White)
+            if (logoImg) logoImg.src = './assets/images/mg-select-final-logo-light.webp';
+            hamburgerLines.forEach(line => line.style.backgroundColor = '#fff');
         }
     }
 }
 
+// New Era Scroll Logic (Sticky Text Switching)
+// New Era Scroll Logic (Sticky Text Switching)
+const newEraScrollLogic = () => {
+    const newEraSection = document.getElementById('newera');
+    if (!newEraSection) return;
+
+    const step1 = document.querySelector('.newera__step.step-1');
+    const step2 = document.querySelector('.newera__step.step-2');
+
+    const rect = newEraSection.getBoundingClientRect();
+
+    // Simple Half-way Logic
+    // rect.top is 0 when at top of section.
+    // We want switch to happen when we scroll 50% of viewport height into it (approx).
+
+    const switchPoint = -window.innerHeight / 2;
+
+    if (rect.top < switchPoint) {
+        // Second Half
+        if (step1) step1.classList.remove('active');
+        if (step2) step2.classList.add('active');
+    } else {
+        // First Half
+        if (step1) step1.classList.add('active');
+        if (step2) step2.classList.remove('active');
+    }
+}
+
+
 // Attach Listener
 const scrollArea = document.querySelector('.body_wrapper');
 if (scrollArea) {
-    scrollArea.addEventListener('scroll', navScrollLogic);
+    scrollArea.addEventListener('scroll', () => {
+        navScrollLogic();
+        newEraScrollLogic();
+    });
     // Initial Call
     navScrollLogic();
+    newEraScrollLogic();
 }
