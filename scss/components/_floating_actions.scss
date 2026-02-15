@@ -1,0 +1,60 @@
+@import "../abstracts/_variables.scss";
+
+.floating-action-container {
+    position: fixed;
+    top: 90px;
+    right: 35px; 
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 10px; 
+    .floating-btn {
+        position: relative;
+        background-color: $bs-gray-600; 
+        background-color: #727272; 
+        color: white;
+        padding: 10px 5px;
+        width: 190px;
+        text-align: center;
+        cursor: pointer;
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 0.5px;
+
+        
+
+        .close-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 22px;
+            height: 22px;
+            background-color: black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: transform 0.2s ease;
+
+            svg {
+                width: 10px;
+                height: 10px;
+                stroke: white;
+                stroke-width: 3;
+            }
+
+        }
+    }
+    .btn2{
+        width: 210px;
+    }
+}

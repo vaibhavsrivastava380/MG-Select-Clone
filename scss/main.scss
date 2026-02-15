@@ -8,9 +8,7 @@
     display: none;
 }
 
-html {
-    // scroll-behavior: smooth; 
-}
+
 
 body {
     scroll-snap-type: y mandatory;
@@ -36,3 +34,4 @@ section {
 @import "./layout/_center.scss";
 @import "./layout/_history.scss";
 @import "./layout/_footer.scss";
+@import "./components/_floating_actions.scss";
