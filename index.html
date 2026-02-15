@@ -20,7 +20,9 @@
     <span class="line bottom"></span>
   </label>
 
-  <!-- Floating Action Buttons -->
+
+
+  <!-- two buttons  -->
   <div class="floating-action-container">
     <div class="floating-btn" id="float-m9">
       E-Book MG M9
@@ -42,6 +44,28 @@
     </div>
   </div>
 
+
+
+
+  <!-- cookie section -->
+  <div class="privacy-cookie-container" id="privacy-cookie-modal">
+    <div class="close-btn link-item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+    <h2 class="privacy-title">Privacy Cookies</h2>
+    <p class="privacy-text">
+      This website utilizes cookies to optimize your browsing experience and enhance the functionality of our site. By
+      continuing to explore the website, you consent to the use of cookies and agree to our Privacy Statement.
+    </p>
+    <div class="privacy-actions">
+      <button class="accept-btn">ACCEPT ALL</button>
+      <button class="reject-btn">REJECT ALL</button>
+    </div>
+  </div>
+
+  <!-- modal -->
   <div class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -325,17 +349,14 @@
 
     <section id="newera" class="newera__section">
       <!-- Internal Snap Points -->
-      <div class="newera__snap-point" style="top: 0;"></div>
-      <div class="newera__snap-point" style="top: 100vh;"></div>
+      <div class="newera__snap-point"></div>
+      <div class="newera__snap-point"></div>
 
       <div class="newera__sticky-wrapper">
-        <!-- Header -->
         <div class="newera__header">
           <p class="newera__title--welcome">WELCOME TO</p>
           <img src="./assets/images/mg-select-final-logo-dark.webp" alt="mg-select-logo" class="newera__title--img">
         </div>
-
-        <!-- Content (Changing Text) -->
         <div class="newera__content-container">
           <div class="newera__step step-1 active">
             <div class="newera__main-title">A New-Era of Luxury</div>
@@ -351,7 +372,6 @@
           </div>
         </div>
 
-        <!-- Footer (Scroll Gallery) -->
         <div class="newera__footer">
           <div class="newera__scroll">
             <img src="./assets/images/scroll-1.webp" alt="scroll image 1" class="scroll-1--img">
@@ -424,7 +444,6 @@
         </div>
       </div>
 
-      <!-- Navigation Arrows -->
       <button class="center__arrow prev" id="center-prev">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -596,6 +615,9 @@
       </div>
     </section>
   </div>
+
+
+
   <!-- this is for sidebar nav thwrere  -->
   <nav class="side-nav">
     <div class="side-nav__item active" data-section="hero"></div>

@@ -1,4 +1,5 @@
 @import "../abstracts/_mixins.scss";
+@import "../abstracts/variables";
 
 .about_section {
     height: 100vh;
@@ -9,9 +10,28 @@
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
+    z-index: 0; 
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("../../assets/images/night-bg.webp");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out;
+        z-index: -1; 
+    }
 
     &.night-mode {
-        background-image: url("../../assets/images/night-bg.webp");
+        &::before {
+            opacity: 1;
+        }
     }
 
     .about__section__discriptio {
@@ -24,16 +44,16 @@
     }
 
     .about_section--text {
-        font-family: sequel, sans-serif;
+        font-family: $font-primary;
         font-size: 40px;
         font-weight: 700;
-        color: #fff;
+        color: $white;
         line-height: 1.1;
         margin-bottom: 10px;
     }
 
     .about_section--text--sub {
-        font-family: inter, sans-serif;
+        font-family: $font-secondary;
         font-size: 20px;
         font-weight: 400;
         margin-bottom: 30px;
@@ -59,7 +79,7 @@
     }
 
     .about__button--text--knowmore {
-        font-family: inter, sans-serif;
+        font-family: $font-secondary;
         font-size: 13px;
         font-weight: 600;
         letter-spacing: 0.5px;
@@ -75,11 +95,11 @@
 
 
         &--text {
-            font-family: inter, sans-serif;
+            font-family: $font-secondary;
             font-size: 13px;
             font-weight: 600;
             letter-spacing: 0.5px;
-            color: #fff;
+            color: $white;
         }
 
         &--arrow {
@@ -149,7 +169,7 @@
 
         &.active {
             display: block;
-            
+
         }
 
         &:hover {
@@ -179,7 +199,7 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease;
     pointer-events: none;
 
     img {
@@ -223,11 +243,11 @@
     .progress-line {
         height: 4px;
         flex: 1;
-        background-color: rgba(255, 255, 255, 0.3); // Dim part
+        background-color: rgba($white, 0.3); 
         transition: background-color 0.5s ease;
 
         &.active {
-            background-color: #fff;
+            background-color: $white;
         }
     }
 }

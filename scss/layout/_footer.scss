@@ -3,7 +3,7 @@
 
 .footer_section {
     background-color: $bs-footer-black;
-    color: #fff;
+    color: $white;
     padding: 30px 5% 10px;
     scroll-snap-align: end;
     height: 80vh;
@@ -11,7 +11,7 @@
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-    font-family: 'sequel', sans-serif;
+    font-family: $font-primary;
 
 
     .footer__sub_top {
@@ -26,10 +26,10 @@
 
         &--right {
             &_title {
-                font-family: 'sequel', sans-serif;
+                font-family: $font-primary;
                 font-size: 24px;
                 margin-bottom: 25px;
-                color: #ccc;
+                color: $gray-light;
             }
 
             .forms {
@@ -37,16 +37,16 @@
                 gap: 15px;
 
                 input {
-                    background: #222;
+                    background: $gray-darker;
                     border: none;
                     padding: 0 20px;
                     height: 50px;
                     width: 360px;
-                    color: #fff;
+                    color: $white;
                     outline: none;
 
                     &::placeholder {
-                        color: #555;
+                        color: $gray-soft;
                     }
                 }
 
@@ -62,26 +62,26 @@
                 display: flex;
                 align-items: center;
                 gap: 10px;
-                color: #777;
+                color: $gray-muted;
                 font-size: 14px;
 
                 input {
                     width: 16px;
                     height: 16px;
                     cursor: pointer;
-                    accent-color: #fff;
+                    accent-color: $white;
                 }
 
                 p {
                     margin: 0;
-                    font-family: 'Inter', sans-serif;
+                    font-family: $font-secondary;
                     font-size: 14px;
                 }
 
                 a {
-                    color: #777;
+                    color: $gray-muted;
                     text-decoration: underline;
-                    font-family: 'Inter', sans-serif;
+                    font-family: $font-secondary;
                     font-size: 14px;
                 }
             }
@@ -97,7 +97,7 @@
             font-size: 24px;
             color: $bs-footer-title;
             margin-bottom: 10px;
-            font-family: 'Inter', sans-serif;
+            font-family: $font-secondary;
 
         }
 
@@ -113,7 +113,7 @@
             color: $bs-footer-title;
             font-size: 16px;
             letter-spacing: 1px;
-            font-family: roboto;
+            font-family: $font-roboto;
             transition: color 0.3s;
             line-height: 1.5;
             font-weight: 500;
@@ -123,7 +123,7 @@
     }
 
     .footer__sub_bottom {
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgba($white, 0.1);
         padding: 30px 0;
         display: flex;
         justify-content: space-between;
@@ -135,7 +135,7 @@
             gap: 40px;
             color: $bs-footer-title;
             font-size: 13px;
-            font-family: 'Inter', sans-serif;
+            font-family: $font-secondary;
             font-weight: 400;
 
             div {
@@ -147,8 +147,9 @@
                 color: $bs-footer-title !important;
                 transition: color 0.3s ease;
                 letter-spacing: 2px;
+
                 &:hover {
-                    color: #fff !important;
+                    color: $white !important;
                 }
             }
         }
@@ -172,7 +173,7 @@
                 svg {
                     width: 17px;
                     height: 17px;
-                    fill: #fff;
+                    fill: $white;
                 }
             }
         }

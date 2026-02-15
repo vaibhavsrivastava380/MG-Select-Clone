@@ -1,13 +1,21 @@
+@import "./variables";
+
+@mixin div_center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @mixin all_button {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2%;
     width: 65%;
-    font-family: roboto;
+    font-family: $font-roboto;
     font-size: 14px;
     font-weight: 400;
-    color: #fff;
-    border: 0.5px solid #fff;
+    color: $white;
+    border: 0.5px solid $white;
     padding: 12px;
 }

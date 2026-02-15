@@ -1,3 +1,5 @@
+@import "../abstracts/variables";
+
 .side-nav {
     position: fixed;
     right: 34px;
@@ -11,20 +13,19 @@
     &__item {
         width: 2px;
         height: 30px;
-        background-color: rgba(255, 255, 255, 0.15);
+        background-color: rgba($white, 0.15);
         cursor: pointer;
-        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        transition: all 0.4s ease-in-out;
         border-radius: 0;
 
         &:hover {
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba($white, 0.3);
         }
 
         &.active {
-            background-color: #ffffff;
+            background-color: $white;
             height: 25px;
             width: 3px;
         }
     }
 }
-

@@ -3,32 +3,28 @@
 .floating-action-container {
     position: fixed;
     top: 90px;
-    right: 35px; 
+    right: 35px;
     z-index: 2000;
     display: flex;
     flex-direction: column;
     align-items: end;
-    gap: 10px; 
+    gap: 10px;
+
     .floating-btn {
         position: relative;
-        background-color: $bs-gray-600; 
-        background-color: #727272; 
-        color: white;
+        background-color: $gray-silver;
+        color: $white;
         padding: 10px 5px;
         width: 190px;
         text-align: center;
         cursor: pointer;
-        
-        display: flex;
-        align-items: center;
-        justify-content: center;
 
-        font-family: 'Inter', sans-serif;
+        @include div_center;
+
+        font-family: $font-secondary;
         font-weight: 700;
         font-size: 16px;
         letter-spacing: 0.5px;
-
-        
 
         .close-btn {
             position: absolute;
@@ -36,11 +32,9 @@
             right: -8px;
             width: 22px;
             height: 22px;
-            background-color: black;
+            background-color: $black;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            @include div_center;
             cursor: pointer;
             z-index: 10;
             transition: transform 0.2s ease;
@@ -48,13 +42,101 @@
             svg {
                 width: 10px;
                 height: 10px;
-                stroke: white;
+                stroke: $white;
                 stroke-width: 3;
             }
 
         }
     }
-    .btn2{
+
+    .btn2 {
         width: 210px;
+    }
+}
+
+// Cookie Container
+.privacy-cookie-container {
+    position: fixed;
+    bottom: 0px;
+    left: 35px;
+    width: 380px;
+    background-color: $white;
+    padding: 30px;
+    z-index: 2000;
+    box-shadow: 0 4px 20px rgba($black, 0.1);
+    font-family: $font-secondary;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+        stroke: $black;
+
+        svg {
+            path {
+                stroke: $black;
+            }
+        }
+    }
+
+    .privacy-title {
+        font-size: 32px;
+        font-weight: 500;
+        font-family: $font-primary;
+        color: $black;
+        margin: 0;
+        margin-top: 20px;
+        letter-spacing: -1px;
+    }
+
+    .privacy-text {
+        font-size: 14px;
+        font-family: $font-secondary;
+        color: $gray-soft;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .privacy-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.2s ease;
+
+            &.accept-btn {
+                background-color: $black;
+                color: $white;
+                font-family: $font-roboto;
+                font-size: 12px;
+                font-weight: 300;
+
+
+            }
+
+            &.reject-btn {
+                background-color: $gray-bg;
+                color: $black;
+                font-family: $font-roboto;
+                font-size: 12px;
+                font-weight: 300;
+
+            }
+        }
     }
 }
