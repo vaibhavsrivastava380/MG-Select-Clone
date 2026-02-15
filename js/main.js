@@ -562,14 +562,14 @@ const closeButtons = document.querySelectorAll('.floating-btn .close-btn');
 
 closeButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent triggering parent click if any
+        e.stopPropagation();
         const parentBtn = btn.closest('.floating-btn');
         if (parentBtn) {
             parentBtn.style.opacity = '0';
             parentBtn.style.pointerEvents = 'none';
             setTimeout(() => {
-                parentBtn.style.display = 'none';
-            }, 300); // Matches CSS transition duration
+                parentBtn.style.visibility = 'hidden';
+            }, 300);
         }
     });
 });
